@@ -1,6 +1,28 @@
-Assignment 5
+# Assignment 6 - Process Management
 
-Part A: Template Engine  
-Part B: Text Editor Utility  
+## Part A
+Process management utility:
+- Top processes by CPU and memory
+- Kill process by PID/name
+- List orphan and zombie processes
+- Running duration of process
+- Waiting processes
 
-Implemented using Bash scripting.
+## Part B
+Process Manager Utility:
+- Register service
+- Start service (daemon)
+- Check status
+- Stop service
+- Change priority
+- List services
+
+## Part C
+Process operations:
+- Clear log file
+- Delete log file
+- Change process priority
+
+## Tools Used
+- Linux
+- Bash Scripting
