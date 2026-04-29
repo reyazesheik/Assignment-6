@@ -1,0 +1,48 @@
+#!/bin/bash
+
+case $1 in
+
+topProcess)
+    if [ "$3" == "memory" ]; then
+        ps -eo pid,comm,%mem --sort=-%mem | head -n $2
+    elif [ "$3" == "cpu" ]; then
+        ps -eo pid,comm,%cpu --sort=-%cpu | head -n $2
+    else
+        echo "Usage: ./otProcessManager topProcess <n> cpu/memory"
+    fi
+    ;;
+
+killProcess)
+    if [[ $2 =~ ^[0-9]+$ ]]; then
+        kill -9 $2
+    else
+        pkill $2
+    fi
+    ;;
+
+listZoombieProcess)
+    ps -eo pid,stat,comm | awk '$2 ~ /Z/'
+    ;;
+
+listOrphanProcess)
+    ps -eo pid,ppid,comm | awk '$2==1'
+    ;;
+
+ListWaitingProcess)
+    ps -eo pid,stat,comm | awk '$2 ~ /D/'
+    ;;
+
+RunningDurationProcess)
+    ps -eo pid,comm,etime | grep $2
+    ;;
+
+killLeastPriorityProcess)
+    pid=$(ps -eo pid,ni --sort=-ni | head -n 2 | tail -n 1 | awk '{print $1}')
+    kill -9 $pid
+    ;;
+
+*)
+    echo "Invalid command"
+    ;;
+
+esac
