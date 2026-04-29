@@ -1,0 +1,44 @@
+#!/bin/bash
+
+cmd=$1
+file=$2
+
+case $cmd in
+
+addLineTop)
+    sed -i "1i $3" $file
+    ;;
+
+addLineBottom)
+    echo "$3" >> $file
+    ;;
+
+addLineAt)
+    sed -i "${3}i $4" $file
+    ;;
+
+updateFirstWord)
+    sed -i "0,/$3/s//$4/" $file
+    ;;
+
+updateAllWords)
+    sed -i "s/$3/$4/g" $file
+    ;;
+
+insertWord)
+    sed -i "s/$3 $4/$3 $5 $4/" $file
+    ;;
+
+deleteLine)
+    if [ -z "$4" ]
+    then
+        sed -i "${3}d" $file
+    else
+        sed -i "/$4/d" $file
+    fi
+    ;;
+
+*)
+    echo "Invalid command"
+    ;;
+esac

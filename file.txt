@@ -1,0 +1,5 @@
+START
+hi world
+linux is good
+hi devops
+END
